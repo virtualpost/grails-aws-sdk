@@ -164,11 +164,11 @@ class AmazonWebService {
         getServiceClient('cloudWatch', regionName) as AmazonCloudWatchClient
     }
 
-    AmazonCloudWatchAsyncClient getCloudWatchEventsAsync(regionName = '') {
+    AmazonCloudWatchEventsAsyncClient getCloudWatchEventsAsync(regionName = '') {
         getServiceClient('cloudWatchEvents', regionName, true) as AmazonCloudWatchEventsAsyncClient
     }
 
-    AmazonCloudWatchClient getCloudWatchEvents(regionName = '') {
+    AmazonCloudWatchEventsClient getCloudWatchEvents(regionName = '') {
         getServiceClient('cloudWatchEvents', regionName) as AmazonCloudWatchEventsClient
     }
 
