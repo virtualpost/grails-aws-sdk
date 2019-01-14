@@ -24,6 +24,8 @@ import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsAsyncClient
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClient
 import com.amazonaws.services.codedeploy.AmazonCodeDeployAsyncClient
 import com.amazonaws.services.codedeploy.AmazonCodeDeployClient
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityAsyncClient
@@ -160,6 +162,14 @@ class AmazonWebService {
 
     AmazonCloudWatchClient getCloudWatch(regionName = '') {
         getServiceClient('cloudWatch', regionName) as AmazonCloudWatchClient
+    }
+
+    AmazonCloudWatchAsyncClient getCloudWatchEventsAsync(regionName = '') {
+        getServiceClient('cloudWatchEvents', regionName, true) as AmazonCloudWatchEventsAsyncClient
+    }
+
+    AmazonCloudWatchClient getCloudWatchEvents(regionName = '') {
+        getServiceClient('cloudWatchEvents', regionName) as AmazonCloudWatchEventsClient
     }
 
     AmazonCodeDeployClient getCodeDeploy(regionName = '') {
@@ -547,6 +557,9 @@ class AmazonWebService {
                 case 'cloudWatch':
                     client = async ? new AmazonCloudWatchAsyncClient(credentials, configuration, executorService) : new AmazonCloudWatchClient(credentials, configuration)
                     break
+                case 'cloudWatchEvents':
+                    client = async ? new AmazonCloudWatchEventsAsyncClient(credentials, configuration, executorService) : new AmazonCloudWatchEventsClient(credentials, configuration)
+                    break
                 case 'codeDeploy':
                     client = async ? new AmazonCodeDeployAsyncClient(credentials, configuration, executorService) : new AmazonCodeDeployClient(credentials, configuration)
                     break
@@ -650,6 +663,7 @@ class AmazonWebService {
                 ServiceAbbreviations.CloudSearch
                 break
             case 'cloudWatch':
+            case 'cloudWatchEvents':
                 ServiceAbbreviations.CloudWatch
                 break
             case 'cognitoIdentity':
