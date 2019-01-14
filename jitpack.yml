@@ -1,0 +1,8 @@
+jdk:
+  - oraclejdk8
+before_install:
+  - pluginVersion=`grep "def version" AwsSdkGrailsPlugin.groovy |cut -f2 -d= |cut -f2 -d\"`
+  - sed -i -e "s/${pluginVersion}/${VERSION}/" AwsSdkGrailsPlugin.groovy
+install:
+  - ./grailsw package-plugin
+  - ./grailsw maven-install
